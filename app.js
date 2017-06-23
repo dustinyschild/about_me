@@ -22,6 +22,7 @@ var answerCorrect = ['no', //Answer 1
   'frisbee' //Also answer 7
 ];
 var userGuessesLowerCase = [];
+var userGuessesFinalState = [];
 var score = 0;
 var questionNumber = 0;
 
@@ -70,27 +71,28 @@ function getLowerCase() {
 }
 
 function normalizeAnswers() {
-//  for(var i = 0; i < questions.length; i++) {
-  if (userGuesses[questionNumber] === 'y') {
-    userGuesses[questionNumber] = 'yes';
+  for(var i = 0; i < questions.length; i++) {
+    if (userGuessesLowerCase[i] === 'y') {
+      userGuessesFinalState[i] = 'yes';
+    }
+    if (userGuessesLowerCase[i] === 'n') {
+      userGuessesFinalState[i] = 'no';
+    }
   }
-  if (userGuesses[questionNumber] === 'n') {
-    userGuesses[questionNumber] = 'no';
-  }
-  //}
+  console.log('Ran Normaize Function' + userGuessesFinalState);
 }
 
 //This function checks user answer is true or false, then returns out a score
 function checkAnswer() {
   console.log(userGuesses);
   console.log(answerCorrect);
-//  for(var i = 0; i < questions.length; i++) {
-  if (userGuesses[questionNumber] == answerCorrect[questionNumber] ||
-    userGuesses[6] === answerCorrect[7]) {
-    score++;
-    console.log('Answer #' + (questionNumber + 1) + ' is correct. Score: ' + score);
-  } else {
-    console.log('Answer #' + (questionNumber + 1) + ' is incorrect. Score: ' + score);
-//  }
+  for(var i = 0; i < questions.length; i++) {
+    if (userGuessesFinalState[i] == answerCorrect[i] ||
+    userGuessesFinalState[6] === answerCorrect[7]) {
+      score++;
+      console.log('Answer #' + (i + 1) + ' is correct. Score: ' + score);
+    } else {
+      console.log('Answer #' + (i + 1) + ' is incorrect. Score: ' + score);
+    }
   }
 }
