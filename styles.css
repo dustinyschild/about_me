@@ -17,8 +17,12 @@ header {
 }
 
 .header-img {
+  float: left;
   margin: auto;
-  max-width: 30%;
+  height: inherit;
+  width: 30%;
+}
+
 div {
   max-height: 150px;
   display:inline;
