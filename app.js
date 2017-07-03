@@ -12,20 +12,23 @@ var questions = ['Am I 20 years old?',
   'Name one of the two sports I enjoy the most.'
 ];
 var userGuesses = [];
+var answersToSeven = [
+  'running',
+  'frisbee'
+];
 var answerCorrect = ['no', //Answer 1
   'yes', //Answer 2
   'no', //Answer 3
   'no', //Answer 4
   'yes', //Answer 5
   '7', //Answer 6
-  'running', //Answer 7
-  'frisbee' //Also answer 7
+  answersToSeven
 ];
+var correctAchieved = false;
 var userGuessesLowerCase = [];
 var userGuessesFinalState = [];
 var score = 0;
 var questionNumber = 0;
-
 while (game) {
   runGame();
   alert(userName + ', you answered ' + score + ' out of 7 questions correctly!');
@@ -35,30 +38,47 @@ while (game) {
 
 function runGame() {
   for (var i = 0; i < questions.length; i++) {
-    console.log(questionNumber);
-    storeAnswers();
-    console.log(userGuesses[questionNumber]);
-    getLowerCase();
-    console.log(userGuesses[questionNumber]);
-    normalizeAnswers();
-    console.log(userGuesses[questionNumber]);
-    checkAnswer();
+    storeAnswers(questionNumber);
+    getLowerCase(questionNumber);
+    normalizeAnswers(questionNumber);
+    checkAnswer(questionNumber);
     questionNumber++;
   }
 }
 
 function storeAnswers() {
-//Loop displays questions and collects answer
-//   for (var i = 0; i < questions.length; i++) {
   userGuesses[questionNumber] = prompt(questions[questionNumber]);
-  console.log('Question ' + questionNumber);
-  console.log('Answer stored as: ' + userGuesses[questionNumber]);
-  if (questionNumber === 6) {
-         //do a guessing loop?
+  if ((questionNumber + 1) === 6) {
+    var correctAchieved = false;
+    for (var i = 4; i > 0; i--){
+      if (parseInt(userGuesses[questionNumber], 10) === 7){
+        correctAchieved = true;
+        break;
+      }
+      if (parseInt(userGuesses[questionNumber], 10) !== 7) {
+        alert(userGuesses[questionNumber] + ' is not correct. ' + i + ' guesses left.');
+        userGuesses[questionNumber] = prompt(questions[questionNumber]);
+        console.log('new answer: ' + userGuesses[questionNumber]);
+      }
+    }
+    if (correctAchieved){
+      alert('Great job! You guessed it!');
+    }
+    if (!correctAchieved){
+      alert('You didn\'t quite get it, better luck next time!');
+    }
   }
-  if (questionNumber === 7) {
-         //do another guessing loop
-//     }
+  if ((questionNumber + 1) === 7) {
+    correctAchieved = false;
+    for (var i = 6; i > 0; i--){
+      console.log(answersToSeven.indexOf(userGuesses[questionNumber]));
+      if(answersToSeven.indexOf(userGuesses[questionNumber] > (-1))){
+        correctAchieved = true;
+        break;
+      } else {
+        alert('Not quite! ' + i + ' guesses left.');
+      }
+    }
   }
 }
 
@@ -86,13 +106,14 @@ function normalizeAnswers() {
 function checkAnswer() {
   console.log(userGuesses);
   console.log(answerCorrect);
-  for(var i = 0; i < questions.length; i++) {
-    if (userGuessesFinalState[i] == answerCorrect[i] ||
-    userGuessesFinalState[6] === answerCorrect[7]) {
-      score++;
-      console.log('Answer #' + (i + 1) + ' is correct. Score: ' + score);
-    } else {
-      console.log('Answer #' + (i + 1) + ' is incorrect. Score: ' + score);
-    }
+  console.log(correctAchieved);
+  if (userGuesses[questionNumber] == answerCorrect[questionNumber] ||
+    answersToSeven.indexOf(userGuesses[questionNumber] !== (-1))){
+    score++;
+    console.log('Answer #' + (questionNumber + 1) + ' is correct. Score: ' + score);
+  } else {
+    console.log('Answer #' + (questionNumber + 1) + ' is incorrect. Score: ' + score);
+//  }
+
   }
 }
