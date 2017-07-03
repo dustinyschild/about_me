@@ -50,9 +50,11 @@ function storeAnswers() {
   console.log('Question ' + questionNumber);
   console.log('Answer stored as: ' + userGuesses[questionNumber]);
   if ((questionNumber + 1) === 6) {
+    var correctAchieved = false;
     for (var i = 4; i > 1; i--){
       if (parseInt(userGuesses[questionNumber], 10) === 7){
         console.log('#6 is correct');
+        correctAchieved = true;
         break;
       }
       if (parseInt(userGuesses[questionNumber], 10) !== 7) {
@@ -61,8 +63,15 @@ function storeAnswers() {
         console.log('new answer: ' + userGuesses[questionNumber]);
       }
     }
+    if (correctAchieved){
+      alert('Great job! You guessed it!');
+    }
+    if (!correctAchieved){
+      alert('You didn\'t quite get it, better luck next time!');
+    }
   }
   if ((questionNumber + 1) === 7) {
+    correctAchieved = false;
     console.log('This is when 7 happens.');
 
 //     }
