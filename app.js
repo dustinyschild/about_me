@@ -26,6 +26,7 @@ var answerCorrect = ['no', //Answer 1
 ];
 var correctAchieved = false;
 var userGuessesLowerCase = [];
+var userGuessesFinalState = [];
 var score = 0;
 var questionNumber = 0;
 while (game) {
@@ -90,21 +91,21 @@ function getLowerCase() {
 }
 
 function normalizeAnswers() {
-//  for(var i = 0; i < questions.length; i++) {
-  if (userGuesses[questionNumber] === 'y') {
-    userGuesses[questionNumber] = 'yes';
+  for(var i = 0; i < questions.length; i++) {
+    if (userGuessesLowerCase[i] === 'y') {
+      userGuessesFinalState[i] = 'yes';
+    }
+    if (userGuessesLowerCase[i] === 'n') {
+      userGuessesFinalState[i] = 'no';
+    }
   }
-  if (userGuesses[questionNumber] === 'n') {
-    userGuesses[questionNumber] = 'no';
-  }
-  //}
+  console.log('Ran Normaize Function' + userGuessesFinalState);
 }
 
 //This function checks user answer is true or false, then returns out a score
 function checkAnswer() {
   console.log(userGuesses);
   console.log(answerCorrect);
-//  for(var i = 0; i < questions.length; i++) {
   console.log(correctAchieved);
   if (userGuesses[questionNumber] == answerCorrect[questionNumber] ||
     answersToSeven.indexOf(userGuesses[questionNumber] !== (-1))){
@@ -113,5 +114,6 @@ function checkAnswer() {
   } else {
     console.log('Answer #' + (questionNumber + 1) + ' is incorrect. Score: ' + score);
 //  }
+
   }
 }
