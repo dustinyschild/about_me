@@ -71,12 +71,13 @@ function storeAnswers() {
   if ((questionNumber + 1) === 7) {
     correctAchieved = false;
     for (var i = 6; i > 0; i--){
-      console.log(answersToSeven.indexOf(userGuesses[questionNumber]));
-      if(answersToSeven.indexOf(userGuesses[questionNumber] > (-1))){
+      console.log(answersToSeven.indexOf(answersToSeven));
+      if(answersToSeven.indexOf(userGuesses[questionNumber]) > (-1)){
         correctAchieved = true;
         break;
       } else {
         alert('Not quite! ' + i + ' guesses left.');
+        userGuesses[questionNumber] = prompt(questions[questionNumber]);
       }
     }
   }
@@ -108,7 +109,7 @@ function checkAnswer() {
   console.log(answerCorrect);
   console.log(correctAchieved);
   if (userGuesses[questionNumber] == answerCorrect[questionNumber] ||
-    answersToSeven.indexOf(userGuesses[questionNumber] !== (-1))){
+    answersToSeven.indexOf(userGuesses[questionNumber]) !== (-1)){
     score++;
     console.log('Answer #' + (questionNumber + 1) + ' is correct. Score: ' + score);
   } else {
