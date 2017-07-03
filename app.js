@@ -36,11 +36,8 @@ function runGame() {
   for (var i = 0; i < questions.length; i++) {
     console.log(questionNumber);
     storeAnswers(questionNumber);
-    console.log(userGuesses[questionNumber]);
     getLowerCase(questionNumber);
-    console.log(userGuesses[questionNumber]);
     normalizeAnswers(questionNumber);
-    console.log(userGuesses[questionNumber]);
     checkAnswer(questionNumber);
     questionNumber++;
   }
@@ -52,11 +49,22 @@ function storeAnswers() {
   userGuesses[questionNumber] = prompt(questions[questionNumber]);
   console.log('Question ' + questionNumber);
   console.log('Answer stored as: ' + userGuesses[questionNumber]);
-  if (questionNumber === 6) {
-         //do a guessing loop?
+  if ((questionNumber + 1) === 6) {
+    for (var i = 4; i > 1; i--){
+      if (parseInt(userGuesses[questionNumber], 10) === 7){
+        console.log('#6 is correct');
+        break;
+      }
+      if (parseInt(userGuesses[questionNumber], 10) !== 7) {
+        console.log(userGuesses[questionNumber] + ' is not correct. ' + i + ' guesses left.');
+        userGuesses[questionNumber] = prompt(questions[questionNumber]);
+        console.log('new answer: ' + userGuesses[questionNumber]);
+      }
+    }
   }
-  if (questionNumber === 7) {
-         //do another guessing loop
+  if ((questionNumber + 1) === 7) {
+    console.log('This is when 7 happens.');
+
 //     }
   }
 }
